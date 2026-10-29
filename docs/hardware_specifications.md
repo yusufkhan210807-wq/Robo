@@ -37,22 +37,22 @@ flowchart TD
         JETSON["NVIDIA Jetson Orin Nano (8GB)"]
         CAM["1080p Wide-Angle USB Camera"]
         LIDAR["LDS-01 360° 2D LiDAR"]
-        BUCK5 -->|5V DC Barrel/GPIO| JETSON
-        BUCK5 -->|5V Power| LIDAR
-        CAM -->|USB 3.0 Port| JETSON
-        LIDAR -->|USB-to-UART Adapter| JETSON
+        BUCK5 -->|"5V DC Barrel/GPIO"| JETSON
+        BUCK5 -->|"5V Power"| LIDAR
+        CAM -->|"USB 3.0 Port"| JETSON
+        LIDAR -->|"USB-to-UART Adapter"| JETSON
     end
 
     subgraph Actuation_System ["⚙️ Differential Drive Actuation"]
         L298N["L298N Dual H-Bridge Driver"]
         MOT_L["Left 12V DC Gear Motor + Encoder"]
         MOT_R["Right 12V DC Gear Motor + Encoder"]
-        BUCK12 -->|VMS / 12V Input| L298N
-        JETSON -->|GPIO Pins 32, 33 (PWM) & 11, 13, 15, 16 (DIR)| L298N
-        L298N -->|OUT1 / OUT2| MOT_L
-        L298N -->|OUT3 / OUT4| MOT_R
-        MOT_L -.->|Encoder A/B Feedback| JETSON
-        MOT_R -.->|Encoder A/B Feedback| JETSON
+        BUCK12 -->|"VMS / 12V Input"| L298N
+        JETSON -->|"GPIO Pins 32, 33 [PWM] & 11, 13, 15, 16 [DIR]"| L298N
+        L298N -->|"OUT1 / OUT2"| MOT_L
+        L298N -->|"OUT3 / OUT4"| MOT_R
+        MOT_L -.->|"Encoder A/B Feedback"| JETSON
+        MOT_R -.->|"Encoder A/B Feedback"| JETSON
     end
 ```
 
