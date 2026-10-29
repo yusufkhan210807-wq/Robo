@@ -37,3 +37,25 @@ graph TD
     
     MotorL -->|Encoder Data| Jetson
     MotorR -->|Encoder Data| Jetson
+---
+
+## 📊 Experimental Benchmarks & Telemetry Results
+
+All raw telemetry CSV logs and analysis plots (generated via `plot_telemetry.py`) are located in the [`data/`](data/) directory:
+* **Test 1 (`test1_open_los.csv`):** Open Line-of-Sight Target Acquisition
+* **Test 2 (`test2_occlusion.csv`):** Obstacle Occlusion & 3-Stage Box Bypass
+* **Test 3 (`test3_blind_search.csv`):** Unmapped Arena VLM-Guided Blind Search
+* **Test 4A (`test4a_redock.csv`):** Target Relocation / Re-docking Recovery
+* **Test 4B (`test4b_midroute.csv`):** Dynamic "Kidnapped Target" Mid-Route Tracking
+
+### Overall Telemetry Comparison Dashboard
+![Telemetry Comparison Dashboard](data/telemetry_comparison_dashboard.png)
+
+### Individual Mission Deep Dives
+| Test 1: Open LOS | Test 2: Occlusion Evasion |
+| :---: | :---: |
+| ![Test 1](data/test1_open_los_deep_dive.png) | ![Test 2](data/test2_occlusion_deep_dive.png) |
+
+| Test 3: Blind Search | Test 4A: Re-docking | Test 4B: Mid-Route Kidnapped Target |
+| :---: | :---: | :---: |
+| ![Test 3](data/test3_blind_search_deep_dive.png) | ![Test 4A](data/test4a_redock_deep_dive.png) | ![Test 4B](data/test4b_midroute_deep_dive.png) |
