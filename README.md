@@ -35,8 +35,10 @@ graph TD
     L298N -->|Power| MotorL[Left DC Motor]
     L298N -->|Power| MotorR[Right DC Motor]
     
-    MotorL -->|Encoder Data| Jetson
+   MotorL -->|Encoder Data| Jetson
     MotorR -->|Encoder Data| Jetson
+```
+
 ---
 
 ## 📊 Experimental Benchmarks & Telemetry Results
