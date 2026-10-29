@@ -1,0 +1,73 @@
+#VRML_SIM R2025a utf8
+
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2025a/projects/objects/backgrounds/protos/TexturedBackground.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2025a/projects/objects/backgrounds/protos/TexturedBackgroundLight.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2025a/projects/objects/floors/protos/RectangleArena.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2025a/projects/objects/street_furniture/protos/FireHydrant.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2025a/projects/robots/robotis/turtlebot/protos/TurtleBot3Burger.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2025a/projects/devices/robotis/protos/RobotisLds01.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2025a/projects/objects/factory/containers/protos/CardboardBox.proto"
+
+WorldInfo {
+}
+Viewpoint {
+  orientation 0.12308854452384059 -0.9382467493307303 -0.323329936098284 5.512284678604698
+  position -2.281365235736267 -0.9150113217059799 2.383759491065999
+}
+TexturedBackground {
+}
+TexturedBackgroundLight {
+}
+RectangleArena {
+  translation -0.0390583 -0.0285398 -1.73195e-14
+  rotation 0 0 1 0.261799
+  floorSize 5 5
+  wallHeight 0.4
+}
+FireHydrant {
+  translation 0.641309 -0.0607059 -3.88578e-16
+  scale 0.3
+}
+TurtleBot3Burger {
+  translation -0.434212 -0.354279 -1.5099e-14
+  rotation 0 0 1 0.261799
+  controller "my_controller"
+  extensionSlot [
+    Camera {
+      translation 0 0 0.03
+      width 640
+      height 480
+    }
+    RobotisLds01 {
+    }
+  ]
+}
+CardboardBox {
+  translation 0.185323 -0.680386 0.2
+  rotation 0 0 1 -2.8797953071795863
+  size 0.25 0.25 0.4
+}
+CardboardBox {
+  translation -0.0797176 0.247232 0.2
+  rotation 0 0 1 0.261799
+  name "cardboard box(1)"
+  size 0.25 0.25 0.4
+}
+CardboardBox {
+  translation 0.377524 0.497939 0.2
+  rotation 0 0 1 0.261799
+  name "cardboard box(2)"
+  size 0.25 0.25 0.4
+}
+CardboardBox {
+  translation 0.273485 -0.979818 0.2
+  rotation 0 0 1 0.261799
+  name "cardboard box(4)"
+  size 0.25 0.25 0.4
+}
+CardboardBox {
+  translation -0.139011 0.427645 0.2
+  rotation 0 0 1 0.261799
+  name "cardboard box(3)"
+  size 0.25 0.25 0.4
+}
