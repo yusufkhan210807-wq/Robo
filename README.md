@@ -1,34 +1,39 @@
-# 🤖 Autonomous VLM-Guided Navigation Brain
+# Hardware Specifications & Circuit Architecture
 
-An infrastructure-free, plug-and-play autonomous navigation controller for mobile robots. Built and simulated on a TurtleBot3 within Webots, this system fuses classic LiDAR mapping with a Dual-AI Vision Stack (YOLOv8 + Moondream VLM) to intelligently explore unmapped environments, evade complex obstacles, and visually hunt down targets without human intervention or pre-programmed routes.
+## 💻 Compute & Processing
+* **NVIDIA Jetson Orin Nano (8GB):** Primary edge AI compute node. Selected for its Tensor Cores, enabling local execution of YOLOv8 and the Moondream VLM without cloud latency.
+* **Arduino Mega 2560 (Optional/Sub-controller):** Handles low-level real-time tasks like motor encoder reading and PWM signal generation.
 
-## 🚀 Key Features
+## 👁️ Sensors
+* **LDS-01 360-degree 2D LiDAR:** Raycasts the surrounding environment to generate the real-time 2D occupancy grid for Priority 1 obstacle evasion.
+* **1080p Wide-Angle USB Camera (FOV 120°):** Captures RGB visual data for the YOLOv8 object detection and Moondream scene classification models.
 
-* **Three-Tier Subsumption Architecture:** Seamlessly arbitrates between Priority 1 (Collision Survival & Evasion), Priority 2 (Mission Targeting & Visual Servoing), and Priority 3 (VLM Context-Aware Exploration).
-* **Dual-AI Vision Stack:** Combines high-speed bounding-box tracking (YOLOv8n) with an asynchronous local Vision-Language Model (Moondream) for semantic scene understanding and target verification.
-* **Real-Time 2D Occupancy Grid Mapping:** Raycasts 360-degree LiDAR data to build a dynamic spatial memory, enabling the robot to navigate around obstacles and remember target pins out of frame.
-* **Dynamic Obstacle Evasion:** Features a strict 3-stage box bypass maneuver to smoothly navigate around tight corners and narrow gaps.
-* **"Kidnapped Target" Tracking:** Utilizes short-term object permanence and phantom-pin invalidation to dynamically track objects that are moved during the mission.
-* **Close-Range HSV Fallback:** Secondary visual verification system to maintain target locks when physical proximity causes AI bounding-box failures.
+## ⚙️ Actuation & Power
+* **L298N Motor Driver Dual H-Bridge:** Controls the voltage and direction of the two drive wheels.
+* **12V DC Gear Motors (x2) with Hall Effect Encoders:** Provides physical locomotion and odometry feedback.
+* **11.1V 3S LiPo Battery (5200mAh):** Primary power source.
+* **LM2596 Step-Down Buck Converters (x2):** Regulates the 11.1V battery down to 5V (for the Jetson/Sensors) and 12V (for the Motor Driver).
 
-## 🛠️ Tech Stack
+## 🔌 System Architecture & Circuit Diagram
+*(The following schematic is generated via Mermaid.js)*
 
-* **Robotics Simulation:** Webots (TurtleBot3 Burger)
-* **Language:** Python 3
-* **Computer Vision:** OpenCV, Ultralytics YOLOv8n
-* **Vision-Language Model (VLM):** Moondream (via local Ollama)
-* **Telemetry & Data:** CSV, Math, NumPy
-
-## ⚙️ Prerequisites
-
-Before running the controller, ensure you have the following installed on your system:
-1. [Webots](https://cyberbotics.com/) (R2023b or newer recommended)
-2. [Python 3.8+](https://www.python.org/)
-3. [Ollama](https://ollama.com/) (running locally)
-
-## 📦 Installation & Setup
-
-**1. Clone the Repository**
-```bash
-git clone [https://github.com/yusufkhan210807-wq/autonomous-navigation-brain.git](https://github.com/yusufkhan210807-wq/autonomous-navigation-brain.git)
-cd autonomous-navigation-brain
+```mermaid
+graph TD
+    Battery[11.1V 3S LiPo Battery] --> Buck1[5V Buck Converter]
+    Battery --> Buck2[12V Buck Converter]
+    
+    Buck1 --> Jetson[NVIDIA Jetson Orin Nano]
+    Buck1 --> LiDAR[LDS-01 360 LiDAR]
+    
+    Buck2 --> L298N[L298N Motor Driver]
+    
+    Jetson <-->|USB 3.0| Camera[1080p USB Camera]
+    Jetson <-->|UART / USB| LiDAR
+    
+    Jetson -->|GPIO / PWM| L298N
+    
+    L298N -->|Power| MotorL[Left DC Motor]
+    L298N -->|Power| MotorR[Right DC Motor]
+    
+    MotorL -->|Encoder Data| Jetson
+    MotorR -->|Encoder Data| Jetson
